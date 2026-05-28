@@ -1,4 +1,5 @@
 import 'package:app_axion/data/car.dart';
+import 'package:app_axion/presentation/pages/car_details_page.dart';
 import 'package:flutter/material.dart';
 
 class CarCard extends StatelessWidget {
@@ -8,6 +9,13 @@ class CarCard extends StatelessWidget {
   @override
 Widget build(BuildContext context) {
   return GestureDetector(
+    onTap: () {
+     
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CarDetailsPage(car: car)),
+      );
+    },
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), // Ajustado para um visual mais equilibrado
       padding: const EdgeInsets.all(20),

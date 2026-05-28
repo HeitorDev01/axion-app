@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:app_axion/data/car.dart';
 import 'package:app_axion/presentation/pages/widgets/car_card.dart';
+import 'package:app_axion/presentation/pages/widgets/more_card.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsPage extends StatelessWidget {
-  const CarDetailsPage({super.key});
+  final Car car;
+  const CarDetailsPage({super.key, required this.car});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +24,10 @@ class CarDetailsPage extends StatelessWidget {
       body: Column(
         children: [
           CarCard(
-            car: Car(model: 'Fortuner GR',
-             distance: 870, 
-             fuelCapacity: 50, 
-             pricePerHour: 45,
+            car: Car(model: car.model,
+             distance: car.distance, 
+             fuelCapacity: car.fuelCapacity, 
+             pricePerHour: car.pricePerHour,
               ),
              ),
             SizedBox(height: 20),
@@ -88,6 +92,28 @@ class CarDetailsPage extends StatelessWidget {
                     ),
                   )
                 ],
+              ),
+            ),
+           Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: List.generate(3, (index) {
+                  // O 'index' começa em 0, então criamos um multiplicador (1, 2, 3...)
+                  final multiplier = index + 1; 
+                  final packageNames = ['Plus', 'Premium', 'Elite'];
+                  final currentPackage = packageNames[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8), // Substitui o SizedBox entre os cards
+                    child: MoreCard(
+                      car: Car(
+                        model: '${car.model} • $currentPackage',
+                        distance: car.distance + (100 * multiplier),
+                        fuelCapacity: car.fuelCapacity + (100 * multiplier),
+                        pricePerHour: car.pricePerHour + (10 * multiplier),
+                      ),
+                    ),
+                  );
+                }),
               ),
             )
         ],

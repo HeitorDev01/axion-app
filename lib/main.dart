@@ -1,4 +1,5 @@
 import 'package:app_axion/firebase_options.dart';
+import 'package:app_axion/presentation/pages/MapsDetailsPage.dart';
 import 'package:app_axion/presentation/pages/car_details_page.dart';
 import 'package:app_axion/presentation/pages/car_list_screen.dart';
 import 'package:app_axion/presentation/pages/onbording_page.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:CarDetailsPage(),
+      home:MapsDetailsPage(),
     );
   }
 }
