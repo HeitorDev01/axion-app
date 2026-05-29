@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class CarListScreen extends StatelessWidget {
   final List<Car> cars = [
+    Car(model: 'Toyota', distance: 870, fuelCapacity: 50, pricePerHour: 45),
     Car(model: 'Fortuner GR', distance: 870, fuelCapacity: 50, pricePerHour: 45),
-    Car(model: 'Fortuner GR', distance: 870, fuelCapacity: 50, pricePerHour: 45),
-    Car(model: 'Fortuner GR', distance: 870, fuelCapacity: 50, pricePerHour: 45),
+    Car(model: 'Ranger', distance: 870, fuelCapacity: 50, pricePerHour: 45),
   ]; // Replace with actual car data
   CarListScreen({super.key});
 
@@ -14,7 +14,10 @@ class CarListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Escolha Seu Carro'),
+        title: const Text('Escolha Seu Carro',
+          style: TextStyle(),
+        ),
+         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
       ),

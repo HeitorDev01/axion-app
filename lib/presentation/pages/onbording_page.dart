@@ -45,13 +45,13 @@ class OnbordingPage extends StatelessWidget {
                         fontSize: 16,
                           ),
                         ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   SizedBox(
-                    width: double.infinity,
-                    height: 50,
+                    width: 320,
+                    height: 54,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CarListScreen()));
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => CarListScreen()), (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,

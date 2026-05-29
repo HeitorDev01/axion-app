@@ -1,4 +1,5 @@
 import 'package:app_axion/firebase_options.dart';
+import 'package:app_axion/presentation/injection_container.dart';
 import 'package:app_axion/presentation/pages/MapsDetailsPage.dart';
 import 'package:app_axion/presentation/pages/car_details_page.dart';
 import 'package:app_axion/presentation/pages/car_list_screen.dart';
@@ -11,6 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  initInjection();
   runApp(const MyApp());
 }
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:MapsDetailsPage(),
+      home:OnbordingPage(),
     );
   }
 }
