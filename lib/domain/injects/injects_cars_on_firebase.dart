@@ -1,8 +1,9 @@
 import 'package:app_axion/data/car.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 // Função para enviar os carros para o banco
-Future<void> InjectsCarsOnFirebase() async {
+Future<void> injectsCarsOnFirebase() async {
   try {
     // 1. Cria um carro de exemplo
     Car carroExemplo = Car(
@@ -17,8 +18,8 @@ Future<void> InjectsCarsOnFirebase() async {
         .collection('cars')
         .add(carroExemplo.toMap());
 
-    print('✅ Carro salvo com sucesso no Firebase!');
+    debugPrint('✅ Carro salvo com sucesso no Firebase!');
   } catch (e) {
-    print('❌ Erro ao salvar carro: $e');
+    debugPrint('❌ Erro ao salvar carro: $e');
   }
 }

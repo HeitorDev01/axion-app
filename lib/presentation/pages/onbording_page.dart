@@ -1,4 +1,5 @@
 import 'package:app_axion/presentation/pages/car_list_screen.dart';
+import 'package:app_axion/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class OnbordingPage extends StatelessWidget {
@@ -7,7 +8,9 @@ class OnbordingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor:Color(0xff2c2b34),
+       // Mesmo preto do resto do app: a foto de cima termina em preto, então
+       // não fica emenda entre a imagem e o fundo da tela
+       backgroundColor: kAppBackground,
       body: Column(
         children: [
           Expanded(
@@ -22,7 +25,15 @@ class OnbordingPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
+            // Em telas baixas o texto + botão não cabem nesta metade e a
+            // Column estourava. O scroll só entra em ação quando falta espaço:
+            // com altura sobrando, o minHeight mantém tudo centralizado.
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +83,10 @@ class OnbordingPage extends StatelessWidget {
                       ),
                     ),
                 ],
+              ),
+            ),
+                  ),
+                ),
               ),
             ),
           )

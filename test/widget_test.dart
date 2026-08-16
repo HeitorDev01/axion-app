@@ -1,30 +1,40 @@
-// This is a basic Flutter widget test.
+// Teste de fumaça: garante que o app abre na tela de boas-vindas e que o
+// botão "Começar" leva para a lista de carros.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Não toca no Firebase: a MyApp só monta a OnbordingPage, que é offline.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_axion/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('abre no onboarding e navega para a lista de carros', (
+    WidgetTester tester,
+  ) async {
+    // A tela padrão do teste é 800x600 (baixa demais). Simula um celular.
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Tela de boas-vindas
+    expect(find.textContaining('Bem-vindo ao Axion'), findsOneWidget);
+    expect(find.text('Começar'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // A fonte usada nos testes é maior que a real e pode empurrar o botão para
+    // fora da tela, então garantimos que ele está visível antes de tocar.
+    await tester.ensureVisible(find.text('Começar'));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Toca em "Começar" e espera a transição de rota terminar
+    await tester.tap(find.text('Começar'));
+    await tester.pumpAndSettle();
+
+    // Lista de carros
+    expect(find.text('Escolha Seu Carro'), findsOneWidget);
+    expect(find.text('Porsche 911 Carrera S'), findsOneWidget);
   });
 }
